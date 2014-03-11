@@ -40,6 +40,7 @@ public class EcoClient {
             System.out.println("Inserisci stringa: ");
             String scritta=std_in.readLine();
             streamOut.println(scritta);
+            streamOut.flush();
             System.out.println(streamIn.readLine());
             
             if(scritta.equals(fine)||scritta.equals(Fine)||scritta.equals(FINE)){
