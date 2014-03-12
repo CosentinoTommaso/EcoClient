@@ -20,19 +20,18 @@ import java.util.Scanner;
 public class EcoClient {
     public static void main(String[] args) {
         int port;
-        String fine = "fine", Fine = "Fine", FINE = "FINE", host;
+        String host;
         
   try{
         Scanner sc = new Scanner(System.in);
-        //System.out.println("Inserisci host: ");
-        //host = sc.nextLine();
+        System.out.println("Inserisci host: ");
+        host = sc.nextLine();
         System.out.println("Inserisci porta: ");
         port = sc.nextInt();
-        InetAddress serverAddress=InetAddress.getLocalHost();//getByName(host);        
+        InetAddress serverAddress=InetAddress./*getLocalHost();*/getByName(host);        
         Socket s=new Socket(serverAddress,port);        
         BufferedReader streamIn=new BufferedReader(new InputStreamReader(s.getInputStream()));
         PrintWriter streamOut=new PrintWriter(new OutputStreamWriter (s.getOutputStream()),true); //stream x gestire il flusso di input
-        
         BufferedReader std_in=new BufferedReader(new InputStreamReader(System.in)); //input da tastiera
         PrintWriter std_out=new PrintWriter(new OutputStreamWriter (System.out),true);
         
@@ -41,12 +40,13 @@ public class EcoClient {
             String scritta=std_in.readLine();
             streamOut.println(scritta);
             streamOut.flush();
-            System.out.println(streamIn.readLine());
-            
-            if(scritta.equals(fine)||scritta.equals(Fine)||scritta.equals(FINE)){
+            String in_arrivo = streamIn.readLine();
+            if(in_arrivo.equals("fine")){
                 System.out.println("Uscita");
                 break; 
             }
+            
+            System.out.println(in_arrivo);
         }
         
         
